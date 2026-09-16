@@ -53,7 +53,7 @@ func _process(delta):
 	
 	# zoom
 	zoom = zoom.lerp(target_zoom, zoom_speed * delta)
-	print("current zoom ", zoom)
+	#print("current zoom ", zoom)
 	# slowly reset target zoom to normal
 	target_zoom = target_zoom.lerp(base_zoom, zoom_speed * delta * 0.5)
 	
