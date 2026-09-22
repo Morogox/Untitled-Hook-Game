@@ -3,13 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://dakn04wqiyal8" path="res://Player/Sprites/sPlayer.png" id="1_i823h"]
 [ext_resource type="Script" uid="uid://dlfxb86xra3jd" path="res://Player/Scripts/player.gd" id="1_rg7kn"]
 [ext_resource type="Texture2D" uid="uid://d07nu3glnbtsq" path="res://Others/Sprites/PLACEHOLDER_hook_point.png" id="3_52sos"]
+[ext_resource type="Texture2D" uid="uid://d30rnwmvt0wqb" path="res://Others/Sprites/PLACEHOLDER_hook_maybe.png" id="4_omv0o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxhn"]
 size = Vector2(64, 60)
 
 [node name="Player" type="CharacterBody2D" unique_id=97415140]
 script = ExtResource("1_rg7kn")
-hook_length = 500
+hook_length = 800
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1763555456]
 texture = ExtResource("1_i823h")
@@ -31,3 +32,9 @@ texture = ExtResource("3_52sos")
 [node name="HookLine" type="Line2D" parent="." unique_id=363496724]
 visible = false
 width = 5.0
+
+[node name="Hook_Potential" type="Node2D" parent="." unique_id=929076055]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Hook_Potential" unique_id=827572141]
+texture = ExtResource("4_omv0o")

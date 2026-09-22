@@ -1,25 +1,29 @@
 extends CharacterBody2D
 var input_vector = Vector2.ZERO
 @export var cursor: Node2D
-enum PlayerState { IDLE, MOVING, HOOKED }
+enum PlayerState { IDLE, HOOKED }
 var state = PlayerState.IDLE
 # Movement speed in pixels per second
 @export var speed = 1000
 @export var acceleration = 1500
-@export var max_speed = 1500     
+@export var max_speed = 1500
 @export var friction = 4000     
 @export var rotation_speed = 10
 @export var hook_length = 400
+@export var hook_pull_force = 100
 
 @onready var HookNode: Node2D = $Hook # node thing
 @onready var HookRayCast: RayCast2D = $HookLineCast # update this if we move player hierachy(?) (idk how to spell)
 @onready var HookLine: Line2D = $HookLine # line connecting player and hook
+@onready var HookPotential: Node2D = $Hook_Potential
 
 func _ready() -> void:
 	# just in case you want to change hook_length from inspector
 	HookRayCast.target_position = Vector2(hook_length, 0)
 	HookNode.top_level = true
 	HookLine.top_level = true
+	HookPotential.top_level = true
+	
 
 func _physics_process(delta):
 	handle_rotation(delta)
@@ -46,7 +50,11 @@ func handle_input():
 	# if the mouse is just clicked in here.
 	if Input.is_action_just_pressed("shoot_hook"):
 		# basically, if the raycast is actually hitting something
-		if HookRayCast.is_colliding():
+		if state == PlayerState.HOOKED:
+			HookNode.visible = false
+			HookLine.visible = false
+			state = PlayerState.IDLE
+		elif HookRayCast.is_colliding():
 			# then we can do whatever we want with the point of collision
 			# just make sure to use is_colliding() before calling get_collision_point()
 			# i tried it without it and it was just giving me the last collision point
@@ -55,21 +63,33 @@ func handle_input():
 			HookNode.rotation = rotation
 			HookNode.visible = true
 			HookLine.visible = true
+			state = PlayerState.HOOKED
 		else:
 			HookNode.visible = false
 			HookLine.visible = false
-		pass
+			state = PlayerState.IDLE
+			
+		
+	if HookRayCast.is_colliding():
+		HookPotential.global_position = HookRayCast.get_collision_point()
+		HookPotential.visible = true
+	else:
+		HookPotential.visible = false
+		
 	
-func handle_movement(delta):
+func handle_movement(delta) -> void:
 	if input_vector != Vector2.ZERO:
-		state = PlayerState.MOVING
+		#state = PlayerState.MOVING
 		var target_velocity = input_vector * max_speed
 		var accel_step = acceleration * delta
 		accel_step = min(accel_step, target_velocity.distance_to(velocity)) # Clamp to prevent overshoot
 		velocity = velocity.move_toward(target_velocity, accel_step)
 	else:
-		state = PlayerState.IDLE
+		#state = PlayerState.IDLE
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		
+	if state == PlayerState.HOOKED:
+		velocity += calculate_hook_pull_force()
 
 func handle_camera_zoom():
 	Camera_Manager.update_zoom(velocity.length())
@@ -78,3 +98,7 @@ func update_hook_line() -> void:
 	HookLine.clear_points()
 	HookLine.add_point(position)
 	HookLine.add_point(HookNode.position)
+
+func calculate_hook_pull_force() -> Vector2:
+	print(position.angle_to_point(HookNode.position))
+	return Vector2.from_angle(position.angle_to_point(HookNode.position)) * hook_pull_force
