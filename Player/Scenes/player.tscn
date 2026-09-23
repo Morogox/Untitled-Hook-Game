@@ -9,6 +9,7 @@
 size = Vector2(64, 60)
 
 [node name="Player" type="CharacterBody2D" unique_id=97415140]
+collision_mask = 3
 script = ExtResource("1_rg7kn")
 hook_length = 800
 
