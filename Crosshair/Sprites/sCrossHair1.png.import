@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d07nu3glnbtsq"
-path="res://.godot/imported/PLACEHOLDER_hook_point.png-dc0257663428132778d340313ff54b49.ctex"
+uid="uid://bwu8vb2btqdxn"
+path="res://.godot/imported/sCrossHair1.png-1f67624ac9ae454b9bfc8ee098d4da83.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Others/Sprites/PLACEHOLDER_hook_point.png"
-dest_files=["res://.godot/imported/PLACEHOLDER_hook_point.png-dc0257663428132778d340313ff54b49.ctex"]
+source_file="res://Crosshair/Sprites/sCrossHair1.png"
+dest_files=["res://.godot/imported/sCrossHair1.png-1f67624ac9ae454b9bfc8ee098d4da83.ctex"]
 
 [params]
 

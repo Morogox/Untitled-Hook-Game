@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bq6jf54yquwib"]
+
+[ext_resource type="Script" uid="uid://yldj86wcbwlq" path="res://Crosshair/Scripts/crosshair.gd" id="1_nqq4m"]
+[ext_resource type="Texture2D" uid="uid://c6kjaxarnwr7f" path="res://Crosshair/Sprites/sCrossHair2.png" id="2_gsd5c"]
+
+[node name="Crosshair" type="Node2D" unique_id=544405061]
+script = ExtResource("1_nqq4m")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=623763076]
+texture = ExtResource("2_gsd5c")

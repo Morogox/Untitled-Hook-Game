@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dp020kvbk7fi2"]
+
+[ext_resource type="Script" uid="uid://86qfd5xba7dr" path="res://Projectiles/Scripts/projectiles.gd" id="1_xobvd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxhn"]
+
+[node name="Projectiles" type="Area2D" unique_id=2133650978]
+script = ExtResource("1_xobvd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=328718590]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6382212]
+shape = SubResource("RectangleShape2D_ptxhn")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1382201853]
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=354178935]
+target_position = Vector2(0, 0)
+collision_mask = 2
+collide_with_areas = true

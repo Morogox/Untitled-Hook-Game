@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://byb24ivh447ok"]
+
+[ext_resource type="PackedScene" uid="uid://dp020kvbk7fi2" path="res://Projectiles/Scenes/Projectiles.tscn" id="1_liq0n"]
+[ext_resource type="Script" uid="uid://bc5374r8355jx" path="res://Projectiles/Scripts/hook.gd" id="2_o3sea"]
+[ext_resource type="Texture2D" uid="uid://d07nu3glnbtsq" path="res://Projectiles/Sprites/PLACEHOLDER_hook_point.png" id="3_4dcph"]
+
+[node name="hook" unique_id=2133650978 instance=ExtResource("1_liq0n")]
+scale = Vector2(2, 2)
+collision_mask = 2
+script = ExtResource("2_o3sea")
+min_return_dist = 50
+max_length = 1000
+hook_pull_force = 100
+destructible = false
+
+[node name="Sprite2D" parent="." index="0" unique_id=328718590]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_4dcph")
+
+[node name="Line2D" type="Line2D" parent="." index="3" unique_id=1363192024]
+width = 5.0
