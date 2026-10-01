@@ -10,7 +10,6 @@ collision_mask = 2
 script = ExtResource("2_o3sea")
 min_return_dist = 50
 max_length = 1000
-hook_pull_force = 100
 destructible = false
 
 [node name="Sprite2D" parent="." index="0" unique_id=328718590]

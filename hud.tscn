@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://blfnoefabkaeb"]
+
+[ext_resource type="Script" uid="uid://83s25syf7lgg" path="res://hud.gd" id="1_37p78"]
+[ext_resource type="Texture2D" uid="uid://cppn5gptfr520" path="res://Others/Sprites/health_icon_PLACEHOLDER.png.png" id="2_64ctp"]
+
+[node name="HUD" type="Control" unique_id=1258347706]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_37p78")
+
+[node name="HealthContainer" type="HFlowContainer" parent="." unique_id=670153036]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.21200001
+offset_right = 1.0
+offset_bottom = -4.376007
+
+[node name="TextureRect" type="TextureRect" parent="HealthContainer" unique_id=1065675017]
+layout_mode = 2
+texture = ExtResource("2_64ctp")
+
+[node name="TextureRect2" type="TextureRect" parent="HealthContainer" unique_id=1152305272]
+layout_mode = 2
+texture = ExtResource("2_64ctp")
+
+[node name="TextureRect3" type="TextureRect" parent="HealthContainer" unique_id=1457478904]
+layout_mode = 2
+texture = ExtResource("2_64ctp")

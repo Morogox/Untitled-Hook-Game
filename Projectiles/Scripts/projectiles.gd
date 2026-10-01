@@ -52,10 +52,10 @@ func _on_hit(collider: Node) -> void:
 	elif collider is PhysicsBody2D:
 		_on_body_entered(collider)
 	
-func _on_area_entered(area: Area2D) -> void: 
+func _on_area_entered(_area: Area2D) -> void: 
 	hit_normal = get_surface_normal()
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(_body: Node2D) -> void:
 	hit_normal = get_surface_normal()
 	
 func rotating(flag: bool):

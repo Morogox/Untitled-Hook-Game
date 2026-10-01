@@ -1,10 +1,11 @@
 extends "res://Projectiles/Scripts/projectiles.gd"
+class_name Hook
+# adding this so i can see stuff in other scripts
 
 enum HookState {FIRING, RETRACTING, HOOKED, IDLE}
 var state := HookState.IDLE
-@onready var player = get_parent()
+@onready var player: Player = get_parent()
 @onready var HookLine: Line2D = $Line2D
-@onready var Co
 
 @export var min_return_dist := 50
 @export var max_length := 1000
@@ -27,7 +28,8 @@ func _physics_process(delta: float) -> void:
 				change_state(HookState.RETRACTING)
 		HookState.RETRACTING:
 			var direction = global_position.direction_to(player.global_position)
-			var movement = direction * b_speed * delta
+			var movement = direction * b_speed * 2 * delta # the 2 is because *2 should be more responsive
+			# than shooting it out
 			if movement.length() >= dst_to_player:
 				global_position = player.global_position
 				change_state(HookState.IDLE)
@@ -61,6 +63,4 @@ func update_hook_line() -> void:
 
 func _on_hit(collider: Node) -> void:
 	if collider.is_in_group("Hookable") and state != HookState.RETRACTING:
-		print("Anchored")
 		state = HookState.HOOKED
-		

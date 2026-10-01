@@ -44,7 +44,7 @@ func _process(delta):
 	global_position = global_position.lerp(target_pos, adjusted_camera_spd * delta)
 	
 	var screen_size = get_viewport_rect().size
-	var half_screen = screen_size / 2
+	var _half_screen = screen_size / 2
 	
 	# tilt
 	rotation_degrees = lerp(rotation_degrees, target_tilt, tilt_speed * delta)
