@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bphtqodndgouu"]
+
+[ext_resource type="PackedScene" uid="uid://fsn2iyoyp7j5" path="res://Enemies/Scenes/enemy.tscn" id="1_abbun"]
+[ext_resource type="Texture2D" uid="uid://dabjvujllrdua" path="res://Enemies/Sprites/sEnemy1.png" id="2_27y81"]
+
+[node name="Enemy" unique_id=797881142 instance=ExtResource("1_abbun")]
+collision_mask = 2
+max_health = 5
+health = 5
+max_speed = 200
+acceleration = 20
+turn_speed = 1
+friction = 600
+
+[node name="Sprite2D" parent="." index="1" unique_id=1263156417]
+texture = ExtResource("2_27y81")
