@@ -14,7 +14,7 @@
 [node name="Crosshair" parent="." unique_id=544405061 instance=ExtResource("3_kry3j")]
 scale = Vector2(0.2, 0.2)
 
-[node name="Player" parent="." unique_id=97415140 groups=["player"] instance=ExtResource("3_8gbba")]
+[node name="Player" parent="." unique_id=97415140 instance=ExtResource("3_8gbba")]
 friction = 500
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=8482732 node_paths=PackedStringArray("player")]
@@ -28,5 +28,7 @@ zoom_speed = 1.0
 
 [node name="Enemy" parent="." unique_id=797881142 instance=ExtResource("8_344ge")]
 position = Vector2(-153, 352)
-acceleration = 1000
-friction = 1000
+collision_mask = 3
+acceleration = 50
+turn_speed = 0.5
+friction = 100

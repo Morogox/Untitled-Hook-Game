@@ -8,8 +8,6 @@ collision_mask = 2
 max_health = 5
 health = 5
 max_speed = 200
-acceleration = 20
-turn_speed = 1
 friction = 600
 
 [node name="Sprite2D" parent="." index="1" unique_id=1263156417]

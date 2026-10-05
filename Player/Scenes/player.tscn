@@ -7,8 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxhn"]
 size = Vector2(64, 60)
 
-[node name="Player" type="CharacterBody2D" unique_id=97415140]
-collision_mask = 3
+[node name="Player" type="CharacterBody2D" unique_id=533333006 groups=["Player"]]
+collision_mask = 7
 script = ExtResource("1_rg7kn")
 rotation_speed = 20
 hook_length = 2000

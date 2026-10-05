@@ -27,7 +27,8 @@ window/size/mode=2
 [global_group]
 
 Hookable=""
-player=""
+Enemy=""
+Player=""
 
 [input]
 
@@ -73,6 +74,7 @@ shoot_hook={
 
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enviorment"
+2d_physics/layer_3="Enemy"
 
 [physics]
 

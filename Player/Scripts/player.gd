@@ -35,6 +35,7 @@ func _physics_process(delta):
 	handle_movement(delta)
 	handle_camera_zoom()
 	move_and_slide()
+	handle_collision()
 	
 	
 func handle_rotation(delta):
@@ -66,7 +67,6 @@ func handle_input():
 func hook_fire():
 	#print("Firing")
 	HookNode.change_state(HookNode.HookState.FIRING) 
-
 
 func hook_retract():
 	#print("Retracting")
@@ -122,3 +122,12 @@ func handle_camera_zoom():
 	
 func calculate_hook_pull_force() -> Vector2:
 	return Vector2.from_angle(position.angle_to_point(HookNode.position)) * hook_pull_force
+	
+func handle_collision():
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var body = collision.get_collider()
+		
+		if body.is_in_group("Enemy"):
+			body.take_hit()
