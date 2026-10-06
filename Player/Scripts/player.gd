@@ -1,7 +1,7 @@
-extends CharacterBody2D
+extends RigidBody2D
 class_name Player
 
-var input_vector = Vector2.ZERO
+var input_vector := Vector2.ZERO
 
 enum PlayerState { IDLE, HOOKED }
 var state = PlayerState.IDLE
@@ -15,7 +15,7 @@ var hooked_then_unhooked: bool = false
 @export var acceleration := 1500
 @export var max_speed := 1500
 @export var max_hooked_speed := 2500
-@export var friction := 4000     
+@export var friction := 1    
 @export var rotation_speed := 10
 @export var hook_length := 400
 @export var hook_pull_force := 100
@@ -34,8 +34,8 @@ func _physics_process(delta):
 	handle_input()
 	handle_movement(delta)
 	handle_camera_zoom()
-	move_and_slide()
-	handle_collision()
+	print(linear_velocity)
+
 	
 	
 func handle_rotation(delta):
@@ -63,6 +63,7 @@ func handle_input():
 			ending_hook_angle = position.angle_to(HookNode.position) # gives angle from hooknode to player
 			hooked_then_unhooked = true
 		hook_retract()
+	input_vector = input_vector.normalized()
 
 func hook_fire():
 	#print("Firing")
@@ -74,28 +75,28 @@ func hook_retract():
 		
 	
 func handle_movement(delta) -> void:
+	var target_velocity := input_vector * max_speed
+	if HookNode.state == HookNode.HookState.HOOKED:
+		target_velocity = input_vector * max_hooked_speed
+	var velocity_difference := target_velocity - linear_velocity
 	if input_vector != Vector2.ZERO:
-		#state = PlayerState.MOVING
-		var target_velocity := Vector2(0, 0)
-		if HookNode.state == HookNode.HookState.HOOKED:
-			target_velocity = input_vector * max_hooked_speed
-		else:
-			target_velocity = input_vector * max_speed
-		var accel_step = acceleration * delta
-		accel_step = min(accel_step, target_velocity.distance_to(velocity)) # Clamp to prevent overshoot
-		velocity = velocity.move_toward(target_velocity, accel_step)
-	else:
-		#state = PlayerState.IDLE
-		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		apply_central_force(velocity_difference * acceleration)
+	elif HookNode.state != HookNode.HookState.HOOKED:
+		apply_central_force(-linear_velocity * friction)
 		
 	if HookNode.state == HookNode.HookState.HOOKED:
-		velocity += calculate_hook_pull_force()
+		apply_central_force(calculate_hook_pull_force())
 	
 	if hooked_then_unhooked:
 		 #basically, no matter what your velocity will stay the same
 		 #but if you do happen to get that sweet spot where you unhook at a long distance,
 		 #then multiply your speed up to a max of 1.5x
-		velocity *= max(1, min(1.5, unhook_length / (hook_length / 3.0)))
+		var multiplier = max(1.0, min(1.5, unhook_length / (hook_length / 3.0)))
+
+		#Linear velocity is just the body's velocity, since we shouln't manipulate it directly
+		#we can just turn it into a force and apply via central impulse
+		var boost = linear_velocity * (multiplier - 1.0)
+		apply_central_impulse(boost)
 		
 		# this time we are just gonna use the fact that if you moved at an angle more than
 		# 180 degrees from the original shot, get like a 1.3x? speed boost and is a value between
@@ -118,16 +119,18 @@ func handle_movement(delta) -> void:
 		hooked_then_unhooked = false
 
 func handle_camera_zoom():
-	Camera_Manager.update_zoom(velocity.length() ** 1.2)
+	Camera_Manager.update_zoom(linear_velocity.length() ** 1.2)
 	
 func calculate_hook_pull_force() -> Vector2:
-	return Vector2.from_angle(position.angle_to_point(HookNode.position)) * hook_pull_force
-	
-func handle_collision():
-	
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var body = collision.get_collider()
-		
-		if body.is_in_group("Enemy"):
-			body.take_hit()
+	var to_hook := HookNode.global_position - global_position
+	var distance := to_hook.length()
+
+	if distance == 0:
+		return Vector2.ZERO
+
+	var direction := to_hook.normalized()
+
+	# Stronger pull as we get farther from the hook.
+	var pull_strength := distance * hook_pull_force
+
+	return direction * pull_strength

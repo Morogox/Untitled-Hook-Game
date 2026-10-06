@@ -15,7 +15,6 @@
 scale = Vector2(0.2, 0.2)
 
 [node name="Player" parent="." unique_id=97415140 instance=ExtResource("3_8gbba")]
-friction = 500
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=8482732 node_paths=PackedStringArray("player")]
 script = ExtResource("4_jjvhh")

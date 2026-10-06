@@ -1,5 +1,5 @@
 extends Camera2D
-@export var player: CharacterBody2D
+@export var player: RigidBody2D
 var base_camera_spd = 15.0
 @export var world_min = Vector2(-5120, -5120)
 @export var world_max = Vector2(5120, 5120)
