@@ -1,6 +1,6 @@
 extends Node2D
 
-var cursor_pos := get_global_mouse_position()
+@onready var cursor_pos := get_global_mouse_position()
 
 
 func _ready():

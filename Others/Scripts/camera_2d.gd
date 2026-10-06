@@ -14,7 +14,7 @@ var base_camera_spd = 15.0
 
 @export var base_zoom = Vector2(1.0,1.0)       # normal zoom
 @export var max_zoom = Vector2(0.6, 0.6) # zoom out when dodging
-@export var zoom_speed = 15.0                # how quickly it lerps
+@export var zoom_speed = 5.0                # how quickly it lerps
 var target_zoom = base_zoom
 
 @export var camera_max_speed = 5000

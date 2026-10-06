@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://fsn2iyoyp7j5"]
+
+[ext_resource type="Script" uid="uid://j4mqsiq8ud1t" path="res://Enemies/Scripts/enemy.gd" id="1_pm7me"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxhn"]
+size = Vector2(64, 60)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=354900374 groups=["Enemy"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_pm7me")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1448051476]
+shape = SubResource("RectangleShape2D_ptxhn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1263156417]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1528909706]
+path_desired_distance = 300.0
+target_desired_distance = 300.0
+radius = 5000.0
+neighbor_distance = 5000.0
+debug_enabled = true
