@@ -129,5 +129,5 @@ func handle_collision():
 		var collision = get_slide_collision(i)
 		var body = collision.get_collider()
 		
-		if body.is_in_group("Enemy"):
+		if body.is_in_group("Enemy") and body.hit_cooldown == 0:
 			body.take_hit()

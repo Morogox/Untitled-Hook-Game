@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://dlfxb86xra3jd" path="res://Player/Scripts/player.gd" id="1_rg7kn"]
 [ext_resource type="PackedScene" uid="uid://byb24ivh447ok" path="res://Projectiles/Scenes/hook.tscn" id="3_52sos"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxhn"]
-size = Vector2(64, 60)
+[sub_resource type="CircleShape2D" id="CircleShape2D_tirg2"]
+radius = 14.3178215
 
 [node name="Player" type="CharacterBody2D" unique_id=533333006 groups=["Player"]]
 collision_mask = 7
@@ -17,7 +17,7 @@ hook_length = 2000
 texture = ExtResource("1_i823h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954186565]
-shape = SubResource("RectangleShape2D_ptxhn")
+shape = SubResource("CircleShape2D_tirg2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1304885646]
 
